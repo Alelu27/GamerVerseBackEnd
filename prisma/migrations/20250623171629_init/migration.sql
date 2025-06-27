@@ -82,6 +82,20 @@ CREATE TABLE "Juego_Plataforma" (
     CONSTRAINT "Juego_Plataforma_pkey" PRIMARY KEY ("Plataforma_PlataformaID","Juego_JuegoID","Juego_Categoria_CategoriaID")
 );
 
+-- CreateTable
+CREATE TABLE "CarritoItem" (
+    "CarritoItemID" SERIAL NOT NULL,
+    "UsuarioID" INTEGER NOT NULL,
+    "JuegoID" INTEGER NOT NULL,
+    "Cantidad" INTEGER NOT NULL DEFAULT 1,
+
+    CONSTRAINT "CarritoItem_pkey" PRIMARY KEY ("CarritoItemID"),
+    CONSTRAINT "CarritoItem_UsuarioID_JuegoID_key" UNIQUE ("UsuarioID", "JuegoID"),
+
+    CONSTRAINT "CarritoItem_UsuarioID_fkey" FOREIGN KEY ("UsuarioID") REFERENCES "Usuario"("UsuarioID") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "CarritoItem_JuegoID_fkey" FOREIGN KEY ("JuegoID") REFERENCES "Juego"("JuegoID") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Usuario_UsuarioID_key" ON "Usuario"("UsuarioID");
 
@@ -108,3 +122,16 @@ ALTER TABLE "Juego_Plataforma" ADD CONSTRAINT "Juego_Plataforma_Plataforma_Plata
 
 -- AddForeignKey
 ALTER TABLE "Juego_Plataforma" ADD CONSTRAINT "Juego_Plataforma_Juego_JuegoID_fkey" FOREIGN KEY ("Juego_JuegoID") REFERENCES "Juego"("JuegoID") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddColumn faltaba imagen 
+ALTER TABLE "Noticia" ADD COLUMN "Imagen" VARCHAR(255);
+
+-- AddColumn faltaba imagen 
+ALTER TABLE "Juego" ADD COLUMN "Imagen" VARCHAR(255);
+
+-- AddColumn faltaba imagen 
+ALTER TABLE "CarritoItem" ADD COLUMN "Imagen" VARCHAR(255);
+
+-- AddColum Foto y Alias en User
+ALTER TABLE "Usuario" ADD COLUMN "Alias" VARCHAR(255); 
+ALTER TABLE "Usuario" ADD COLUMN "Foto" VARCHAR(255);  

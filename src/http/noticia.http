@@ -1,0 +1,37 @@
+@baseUrl = http://localhost:3001
+@authTokenAdmin = Bearer TU_TOKEN_DE_AUTENTICACION_DE_ADMIN_AQUI
+
+### 1. GET: Obtener todas las noticias 
+GET {{baseUrl}}/noticias
+Content-Type: application/json
+
+### 2. GET: Obtener una noticia por ID 
+GET {{baseUrl}}/noticias/1
+Content-Type: application/json
+
+### 3. POST: Crear una nueva noticia
+POST {{baseUrl}}/noticias
+Authorization: {{authTokenAdmin}}
+Content-Type: application/json
+
+{
+    "Titulo": "Título de mi Nueva Noticia",
+    "Texto": "Este es el contenido detallado de la nueva noticia que estoy publicando.",
+    "imagen": "https://example.com/ruta_a_mi_imagen_noticia.jpg" // URL o ruta de la imagen (opcional)
+}
+
+### 4. PUT: Actualizar una noticia existente 
+PUT {{baseUrl}}/noticias/[ID_DE_NOTICIA_EXISTENTE]
+Authorization: {{authTokenAdmin}}
+Content-Type: application/json
+
+{
+    "Titulo": "Título Actualizado de la Noticia",
+    "Texto": "Contenido modificado de la noticia. ¡Aquí hay nuevas novedades!",
+    "imagen": "https://example.com/ruta_actualizada_imagen.jpg" // Puedes actualizar o dejar null
+}
+
+### 5. DELETE: Eliminar una noticia 
+DELETE {{baseUrl}}/noticias/[ID_DE_NOTICIA_EXISTENTE]
+Authorization: {{authTokenAdmin}}
+Content-Type: application/json

@@ -1,0 +1,20 @@
+### 1. GET: Obtener todos los items del Carrito del usuario autenticado
+GET http://localhost:3001/carrito
+Content-Type: application/json
+
+### 2. POST: Agregar un Juego al Carrito o Actualizar su Cantidad
+POST http://localhost:3001/carrito/items
+Content-Type: application/json
+
+{
+    "juegoId": [1], 
+    "cantidad": 2              
+}
+
+### 3. DELETE: Eliminar un Item específico del Carrito
+DELETE http://localhost:3001/carrito/items/1
+Content-Type: application/json
+
+### 4. DELETE: Vaciar completamente el Carrito del usuario
+DELETE http://localhost:3001/carrito
+Content-Type: application/json

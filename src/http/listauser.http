@@ -1,0 +1,4 @@
+### 1. GET: Obtener la lista de todos los Usuarios (Requiere rol 'admin')
+GET http://localhost:3001/users
+Authorization: Bearer TU_TOKEN_DE_AUTENTICACION_DE_ADMIN_AQUI
+Content-Type: application/json

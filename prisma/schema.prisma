@@ -22,15 +22,17 @@ model Categoria {
 
 model Usuario {
   UsuarioID Int      @id @default(autoincrement()) 
-  Correo     String @db.VarChar(100)
+  Correo     String @db.VarChar(100) @unique
   Password   String @db.VarChar(100)
   Nombre     String @db.VarChar(50)
+  Alias      String? @db.VarChar(50)
+  Foto       String? @db.VarChar(255)
   Token      String @db.VarChar(50)
   Estado     Int
   Calificaciones Calificacion[]
   Ventas        Venta[]
+  CarritoItems   CarritoItem[]
 }
-
 
 model Juego {
   JuegoID               Int     @id @default(autoincrement())
@@ -43,6 +45,8 @@ model Juego {
   Calificaciones        Calificacion[]
   Ventas                Venta[]
   Plataformas           Juego_Plataforma[]
+  CarritoItems          CarritoItem[]
+  Imagen                String?          @db.VarChar(255)
 }
 
 model Plataforma {
@@ -80,6 +84,7 @@ model Noticia {
   NoticiaID Int     @id @default(autoincrement())
   Titulo    String  @db.VarChar(100)
   Texto     String  @db.VarChar(1000)
+  Imagen   String?  @db.VarChar(255)
   Activo    Int
 }
 
@@ -91,4 +96,14 @@ model Juego_Plataforma {
   @@id([PlataformaID, JuegoID])
 }
 
+model CarritoItem {
+  CarritoItemID Int     @id @default(autoincrement())
+  UsuarioID     Int
+  JuegoID       Int
+  Cantidad      Int     @default(1)
+  Usuario       Usuario @relation(fields: [UsuarioID], references: [UsuarioID])
+  Juego         Juego   @relation(fields: [JuegoID], references: [JuegoID])
+  Imagen        String? @db.VarChar(255)
+  @@unique([UsuarioID, JuegoID])
+}
 
